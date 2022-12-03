@@ -1,7 +1,9 @@
 package me.hobbyshop.meteordestruction;
 
 import lombok.Getter;
+import me.hobbyshop.meteordestruction.utility.Logger;
 import me.hobbyshop.meteordestruction.utility.Window;
+import org.lwjgl.Version;
 
 public class Game {
 
@@ -23,7 +25,9 @@ public class Game {
     }
 
     private void init() {
-        this.window = new Window("Epic Meteor Destruction   (Brutal Game)", 420, 187);
+        Logger.info("LWJGL Version: \"" + Version.getVersion() + "\"");
+
+        this.window = new Window("Epic Meteor Destruction   (Brutal Game)", 1280, 760);
         this.window.init();
     }
 
@@ -40,7 +44,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Game.instance.run();
+        Game.getInstance().run();
     }
 
 }

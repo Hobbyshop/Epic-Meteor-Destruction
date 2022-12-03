@@ -31,16 +31,20 @@ public class Window {
     public void init() {
         GLFWErrorCallback.createPrint(System.err).set();
 
-        if (!glfwInit())
-            throw new IllegalStateException("Unable to initialize GLFW");
+        if (!glfwInit()) {
+            Logger.fatal("Unable to initialize GLFW!");
+            return;
+        }
 
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
         id = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
-        if (id == NULL)
-            throw new RuntimeException("Failed to create the GLFW window");
+        if (id == NULL) {
+            Logger.fatal("Unable to initialize GLFW!");
+            return;
+        }
 
         GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         glfwSetWindowPos(id, (vidMode.width() - this.width) / 2, (vidMode.height() - this.height) / 2);
