@@ -1,10 +1,14 @@
 package me.hobbyshop.meteordestruction.math;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@AllArgsConstructor
+@Getter
+@Setter
 public class Vec3 {
 
-    private int x, y, z;
+    private float x, y, z;
 
 }

@@ -1,8 +1,10 @@
 package me.hobbyshop.meteordestruction.math;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
+@AllArgsConstructor
+@Getter
 public class Vertex {
 
     private Vec3 position;
