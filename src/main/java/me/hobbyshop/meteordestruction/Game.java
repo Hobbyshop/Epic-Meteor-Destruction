@@ -14,14 +14,16 @@ public class Game {
     private Window window;
 
     public void run() {
-        this.init();
+        new Thread(() -> {
+            this.init();
 
-        while (!window.shoulcClose()) {
-            this.update();
-            this.render();
-        }
+            while (!window.shoulcClose()) {
+                this.update();
+                this.render();
+            }
 
-        this.cleanup();
+            this.cleanup();
+        }, "game").start();
     }
 
     private void init() {
