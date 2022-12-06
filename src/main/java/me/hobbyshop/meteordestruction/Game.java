@@ -1,6 +1,7 @@
 package me.hobbyshop.meteordestruction;
 
 import lombok.Getter;
+import me.hobbyshop.meteordestruction.graphics.Shader;
 import me.hobbyshop.meteordestruction.math.Mesh;
 import me.hobbyshop.meteordestruction.math.Vec3;
 import me.hobbyshop.meteordestruction.math.Vertex;
@@ -20,7 +21,8 @@ public class Game {
     @Getter
     private GameRenderer renderer;
 
-    public Mesh mesh = new Mesh(new Vertex[] {
+    private Shader shader;
+    private Mesh mesh = new Mesh(new Vertex[] {
             new Vertex(new Vec3(-0.5f,  0.5f, 0.0f), new Vec3(1.0F, 1.0F, 1.0F)),
             new Vertex(new Vec3(-0.5f, -0.5f, 0.0f), new Vec3(1.0F, 1.0F, 1.0F)),
             new Vertex(new Vec3( 0.5f, -0.5f, 0.0f), new Vec3(1.0F, 1.0F, 1.0F)),
@@ -47,10 +49,13 @@ public class Game {
         Logger.info("LWJGL Version: \"" + Version.getVersion() + "\"");
 
         this.window = new Window("Epic Meteor Destruction   (Brutal Game)", 1280, 760);
+        this.shader = new Shader("/shaders/main.vert", "/shaders/main.frag");
         this.renderer = new GameRenderer();
 
         this.window.init();
+
         this.mesh.build();
+        this.shader.create();
     }
 
     private void update() {
@@ -58,11 +63,13 @@ public class Game {
     }
 
     private void render() {
-        renderer.renderMesh(mesh);
+        renderer.renderMesh(mesh, shader);
         window.swapBuffers();
     }
 
     private void cleanup() {
+        this.shader.destroy();
+
         this.window.destroy();
     }
 
